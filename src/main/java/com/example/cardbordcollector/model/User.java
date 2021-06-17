@@ -12,13 +12,12 @@ import java.util.List;
 @Data
 public class User {
 
-    private String pseudo;
-
     @Id
     @GeneratedValue
-    private Long id;
+    private int id;
+    private String pseudo;
+    private String motDePasse;
 
     @OneToMany
     private List<Collection> listCollection;
-
 }

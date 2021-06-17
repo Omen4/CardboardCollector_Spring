@@ -3,9 +3,7 @@ package com.example.cardbordcollector.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
-import net.minidev.json.JSONObject;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.lang.Nullable;
 
 
@@ -14,6 +12,7 @@ import java.util.ArrayList;
 
 
 @Entity
+@EntityListeners(AuditingEntityListener.class)
 @Data
 public class Card {
 
