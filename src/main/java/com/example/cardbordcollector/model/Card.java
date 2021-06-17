@@ -9,11 +9,17 @@ import net.minidev.json.JSONObject;
 import org.springframework.lang.Nullable;
 
 
+import javax.persistence.*;
+import java.util.ArrayList;
+
+
+@Entity
 @Data
 public class Card {
 
-    private JSONObject data;
-    public Card(){}
+    @Id
+    @GeneratedValue
+    private Long id;
 
     @JsonProperty("id")
     private long ygoId;
@@ -58,7 +64,8 @@ public class Card {
     private String linkmarkers;
 
     @JsonProperty("card_sets")
-    private String[] card_sets;
+    @OneToMany
+    private ArrayList<Card> card_sets;
 
     @JsonProperty("set_name")
     private String set_name;
@@ -73,7 +80,8 @@ public class Card {
     private float set_price;
 
     @JsonProperty("card_images")
-    private String[] card_images;
+    @OneToMany
+    private ArrayList<Card> card_images;
 
     @JsonProperty("image_url")
     private String image_url;
