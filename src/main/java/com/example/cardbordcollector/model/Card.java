@@ -1,7 +1,7 @@
 package com.example.cardbordcollector.model;
 
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -17,89 +17,84 @@ import org.springframework.web.reactive.function.client.WebClient;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.List;
 
 
 @Entity
 @EntityListeners(AuditingEntityListener.class)
-@Getter
-@Setter
-@RestController
-@RequestMapping("/myapi/vers")
+@Table(name="TBL_CARDS")
+@RequestMapping("/myapi/cards")
+@Data
 public class Card {
 
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="id")
     private Long id;
 
-    @JsonProperty("id")
+    @Column(name="ygoID")
     private long ygoId;
 
-    @JsonProperty("name")
+    @Column(name="name")
     private String name;
 
-    @JsonProperty("type")
+    @Column(name="type")
     private String type;
 
-    @JsonProperty("desc")
+    @Column(name="desc")
     private String desc;
 
-    @Nullable
-    @JsonProperty("atk")
+    @Column(name="atk")
     private int atk;
 
-    @Nullable
-    @JsonProperty("def")
+    @Column(name="def")
     private int def;
 
-    @JsonProperty("level")
+    @Column(name="level")
     private int level;
 
-    @JsonProperty("race")
+    @Column(name="race")
     private String race;
 
-    @JsonProperty("attribute")
+    @Column(name="attribute")
     private String attribute;
     //toUpperCase
 
-    @JsonProperty("archetype")
+    @Column(name="archetype")
     private String archetype;
 
-    @JsonProperty("scale")
+    @Column(name="scale")
     private int scale;
 
-    @JsonProperty("linkval")
+    @Column(name="linkval")
     private int linkval;
 
-    @JsonProperty("linkmarkers")
+    @Column(name="linkmarkers")
     private String linkmarkers;
 
-    @JsonProperty("card_sets")
     @OneToMany
-    private ArrayList<Card> card_sets;
+    @JoinColumn(name="card_sets")
+    private List<YgoSet> card_sets;
 
-    @JsonProperty("set_name")
+    @Column(name="set_name")
     private String set_name;
 
-    @JsonProperty("set_code")
+    @Column(name="set_code")
     private String set_code;
 
-    @JsonProperty("set_rarity")
+    @Column(name="set_rarity")
     private String set_rarity;
 
-    @JsonProperty("set_price")
+    @Column(name="set_price")
     private float set_price;
 
-    @JsonProperty("card_images")
-    @OneToMany
-    private ArrayList<Card> card_images;
-
-    @JsonProperty("image_url")
+    @Column(name="image_url")
     private String image_url;
 
-    @JsonProperty("tcg_date")
+    @Column(name="tcg_date")
     private String tcg_date;
 
-    @JsonProperty("ocg_date")
+    @Column(name="ocg_date")
     private String ocg_date;
 }
