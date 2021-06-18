@@ -1,6 +1,4 @@
 package com.example.cardbordcollector.model;
-
-import com.example.cardbordcollector.view.VueUtilisateur;
 import com.fasterxml.jackson.annotation.JsonView;
 import lombok.Data;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -14,10 +12,8 @@ public class Role {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @JsonView({VueUtilisateur.Standard.class})
     private int id;
 
-    @JsonView({VueUtilisateur.Standard.class})
     private String denomination;
 
     public int getId() {
