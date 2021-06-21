@@ -1,6 +1,8 @@
 package com.example.cardbordcollector.model;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
@@ -8,28 +10,21 @@ import java.util.List;
 
 @Entity
 @EntityListeners(AuditingEntityListener.class)
+@Table(name="TBL_CCG")
 @Data
+@Getter
+@Setter
 public class Collection {
-
-    @ManyToOne
-    private User user;
-    private String tcg;
 
     @Id
     @GeneratedValue
+    @Column(name="collectionId")
     private Long id;
 
-    @ManyToMany
-    private List<Card> cardList;
+    @Column(name="ccgName")
+    private String ccgName;
 
-    public Collection(User user, String tcg, List<Card> cardList){
-        this.user = user;
-        this.tcg = tcg;
-        this.cardList = cardList;
+    @OneToMany
+    private List<Card> listCard;
 
-    }
-
-    public Collection() {
-
-    }
 }

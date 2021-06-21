@@ -1,6 +1,8 @@
 package com.example.cardbordcollector.model;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -10,7 +12,9 @@ import javax.persistence.*;
 @EntityListeners(AuditingEntityListener.class)
 @Table(name="TBL_SETS")
 @Data
-@RequestMapping("/myapi/sets")
+@Getter
+@Setter
+//@RequestMapping("/myapi/sets")
 public class YgoSet {
 
     @Id
