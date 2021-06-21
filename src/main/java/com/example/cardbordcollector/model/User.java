@@ -13,7 +13,7 @@ import java.util.Set;
 
 @Entity
 @EntityListeners(AuditingEntityListener.class)
-@Table(name="TBL_USERS")
+@Table(name="USERS")
 @Getter
 @Setter
 public class User {
@@ -37,5 +37,16 @@ public class User {
 //    private Set<Role> listeRole = new HashSet<>();
 
     @OneToMany
+    @JoinTable(
+            name = "user_collection",
+            joinColumns = @JoinColumn(name = "userId", referencedColumnName = "userId"),
+            inverseJoinColumns = @JoinColumn(name = "collectionId", referencedColumnName = "collectionId"))
     private List<Collection> listCollection;
+
+    @ManyToMany
+    @JoinTable(
+            name = "user_role",
+            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "userId"),
+            inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "roleId"))
+    private Set<Role> listeRole = new HashSet<>();
 }

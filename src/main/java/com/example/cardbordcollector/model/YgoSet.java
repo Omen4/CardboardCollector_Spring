@@ -10,7 +10,7 @@ import javax.persistence.*;
 
 @Entity
 @EntityListeners(AuditingEntityListener.class)
-@Table(name="TBL_SETS")
+@Table(name="SETS")
 @Data
 @Getter
 @Setter
@@ -19,8 +19,8 @@ public class YgoSet {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
-    private Long id;
+    @Column(name = "setId", nullable = false)
+    private Long setId;
 
     @Column(name="set_name")
     private String set_name;

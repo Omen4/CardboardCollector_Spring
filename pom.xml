@@ -9,9 +9,9 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.example</groupId>
-    <artifactId>CardbordCollector</artifactId>
+    <artifactId>CardboardCollector</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>CardbordCollector</name>
+    <name>CardboardCollector</name>
     <description>TCG collection manager</description>
 
     <properties>
@@ -233,28 +233,28 @@
                 </dependency>
             </dependencies>
 
-            <properties>
+<!--            <properties>-->
 
-                <!--_______ utilisee a la fin du pom (<packaging>${packaging.type}</packaging>) _______- -->
-                <packaging.type>war</packaging.type>
+<!--                &lt;!&ndash;_______ utilisee a la fin du pom (<packaging>${packaging.type}</packaging>) _______- &ndash;&gt;-->
+<!--                <packaging.type>war</packaging.type>-->
 
-                <server_port>8080</server_port><!-- non utilisé en production -->
-                <database_host>172.18.0.2</database_host>
-                <database_port>3306</database_port>
-                <database_name>demo_spring_bloc_note</database_name>
-                <!--_______ ___________________________________________________________________________  -->
-                <!-- _______Ces informations devraient se situer dans le fichier .m2/settings.xml________-->
-                <!-- _____Ou tout autre moyen pour qu'elles n'apparaissent pas en clair sur le repo _____-->
-                <database_username>root</database_username>
-                <database_password>root</database_password>
-                <jwt_secret>azerty123</jwt_secret>
-                <!-- __________________________________________________________________________________  -->
-                <database_initialization_mode>NEVER</database_initialization_mode>
-                <database_ddl_initialization>false</database_ddl_initialization>
-                <database_ddl_initialization_mode>none</database_ddl_initialization_mode>
-                <jpa_show_sql>false</jpa_show_sql>
-                <dossier.upload>\tmp\upload-spring</dossier.upload>
-            </properties>
+<!--                <server_port>8080</server_port>&lt;!&ndash; non utilisé en production &ndash;&gt;-->
+<!--                <database_host>172.18.0.2</database_host>-->
+<!--                <database_port>3306</database_port>-->
+<!--                <database_name>cardboardCollector</database_name>-->
+<!--                &lt;!&ndash;_______ ___________________________________________________________________________  &ndash;&gt;-->
+<!--                &lt;!&ndash; _______Ces informations devraient se situer dans le fichier .m2/settings.xml________&ndash;&gt;-->
+<!--                &lt;!&ndash; _____Ou tout autre moyen pour qu'elles n'apparaissent pas en clair sur le repo _____&ndash;&gt;-->
+<!--                <database_username>root</database_username>-->
+<!--                <database_password>root</database_password>-->
+<!--                <jwt_secret>azerty123</jwt_secret>-->
+<!--                &lt;!&ndash; __________________________________________________________________________________  &ndash;&gt;-->
+<!--                <database_initialization_mode>NEVER</database_initialization_mode>-->
+<!--                <database_ddl_initialization>false</database_ddl_initialization>-->
+<!--                <database_ddl_initialization_mode>none</database_ddl_initialization_mode>-->
+<!--                <jpa_show_sql>false</jpa_show_sql>-->
+<!--                <dossier.upload>\tmp\upload-spring</dossier.upload>-->
+<!--            </properties>-->
         </profile>
 
     </profiles>

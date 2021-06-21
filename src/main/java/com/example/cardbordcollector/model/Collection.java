@@ -10,7 +10,7 @@ import java.util.List;
 
 @Entity
 @EntityListeners(AuditingEntityListener.class)
-@Table(name="TBL_CCG")
+@Table(name="COLLECTION")
 @Data
 @Getter
 @Setter
@@ -25,6 +25,10 @@ public class Collection {
     private String ccgName;
 
     @OneToMany
+    @JoinTable(
+            name = "collection_card",
+            joinColumns = @JoinColumn(name = "collectionId", referencedColumnName = "collectionId"),
+            inverseJoinColumns = @JoinColumn(name = "cardId", referencedColumnName = "cardId"))
     private List<Card> listCard;
 
 }

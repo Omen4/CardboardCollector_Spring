@@ -9,7 +9,7 @@ import javax.persistence.*;
 
 @Entity
 @EntityListeners(AuditingEntityListener.class)
-@Table(name="TBL_ROLES")
+@Table(name="ROLES")
 @Data
 @Getter
 @Setter
