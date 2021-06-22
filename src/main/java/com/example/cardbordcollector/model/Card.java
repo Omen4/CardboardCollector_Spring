@@ -30,74 +30,74 @@ public class Card {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="cardId")
-    private Long cardId;
+    @Column(name="cardid")
+    private int id;
 
-    @Column(name="ygoId")
-    private Long ygoId;
+    @Column(name="ygoid")
+    private int ygoid;
 
-    @Column(name="name")
+    @Column(name="cardname")
     private String name;
 
-    @Column(name="type")
+    @Column(name="cardtype")
     private String type;
 
-    @Column(name="desc")
+    @Column(name="carddesc")
     private String desc;
 
-    @Column(name="atk")
+    @Column(name="cardatk")
     private int atk;
 
-    @Column(name="def")
+    @Column(name="carddef")
     private int def;
 
-    @Column(name="level")
+    @Column(name="cardlevel")
     private int level;
 
-    @Column(name="race")
+    @Column(name="cardrace")
     private String race;
 
-    @Column(name="attribute")
+    @Column(name="cardattribute")
     private String attribute;
     //toUpperCase
 
-    @Column(name="archetype")
+    @Column(name="cardarchetype")
     private String archetype;
 
-    @Column(name="scale")
+    @Column(name="cardscale")
     private int scale;
 
-    @Column(name="linkval")
+    @Column(name="cardlinkval")
     private int linkval;
 
-    @Column(name="linkmarkers")
+    @Column(name="cardlinkmarkers")
     private String linkmarkers;
 
-//    @OneToMany
-//    @JoinTable(
-//            name = "card_ygosets",
-//            joinColumns = @JoinColumn(name = "card_id", referencedColumnName = "card_id"),
-//            inverseJoinColumns = @JoinColumn(name = "setId", referencedColumnName = "setId"))
-//    private List<YgoSet> listCardSets;
+    @OneToMany
+    @JoinTable(
+            name = "ygocards_ygosets",
+            joinColumns = @JoinColumn(name = "cardid", referencedColumnName = "cardid"),
+            inverseJoinColumns = @JoinColumn(name = "setid", referencedColumnName = "setid"))
+    private List<YgoSet> listCardSets;
 
-    @Column(name="set_name")
+    @Column(name="setname")
     private String set_name;
 
-    @Column(name="set_code")
+    @Column(name="setcode")
     private String set_code;
 
-    @Column(name="set_rarity")
+    @Column(name="setrarity")
     private String set_rarity;
 
-    @Column(name="set_price")
+    @Column(name="setprice")
     private float set_price;
 
-    @Column(name="image_url")
+    @Column(name="imageurl")
     private String image_url;
 
-    @Column(name="tcg_date")
+    @Column(name="tcgdate")
     private String tcg_date;
 
-    @Column(name="ocg_date")
+    @Column(name="ocgdate")
     private String ocg_date;
 }

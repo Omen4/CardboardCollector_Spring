@@ -18,15 +18,15 @@ public class YgoSet {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "setId", nullable = false)
-    private Long setId;
+    @Column(name = "setid", nullable = false)
+    private int setId;
 
-    @Column(name="set_name")
+    @Column(name="setname")
     private String set_name;
 
-    @Column(name="set_code")
+    @Column(name="setcode")
     private String set_code;
 
-    @Column(name="set_rarity")
+    @Column(name="setrarity")
     private String set_rarity;
 }

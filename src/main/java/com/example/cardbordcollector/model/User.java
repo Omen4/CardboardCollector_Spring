@@ -19,14 +19,14 @@ import java.util.Set;
 public class User {
 
     @Id
-    @Column(name="userId")
+    @Column(name="userid")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column
+    @Column(name="userpseudo")
     private String pseudo;
 
-    @Column(name="password")
+    @Column(name="userpassword")
     private String password;
 
 //    @ManyToMany
@@ -36,17 +36,17 @@ public class User {
 //            inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
 //    private Set<Role> listeRole = new HashSet<>();
 
-//    @OneToMany
-//    @JoinTable(
-//            name = "user_collection",
-//            joinColumns = @JoinColumn(name = "userId", referencedColumnName = "userId"),
-//            inverseJoinColumns = @JoinColumn(name = "collectionId", referencedColumnName = "collectionId"))
-//    private List<Collection> listCollection;
+    @OneToMany
+    @JoinTable(
+            name = "user_collection",
+            joinColumns = @JoinColumn(name = "userid", referencedColumnName = "userid"),
+            inverseJoinColumns = @JoinColumn(name = "collectionid", referencedColumnName = "collectionid"))
+    private List<Collection> listCollection;
 
     @ManyToMany
     @JoinTable(
             name = "user_role",
-            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "userId"),
-            inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "roleId"))
+            joinColumns = @JoinColumn(name = "userid", referencedColumnName = "userid"),
+            inverseJoinColumns = @JoinColumn(name = "roleid", referencedColumnName = "roleid"))
     private Set<Role> listeRole = new HashSet<>();
 }

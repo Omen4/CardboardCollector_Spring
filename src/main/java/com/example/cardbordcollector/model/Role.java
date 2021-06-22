@@ -16,10 +16,10 @@ public class Role {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="roleId")
+    @Column(name="roleid")
     private int id;
     
-    @Column(name="roleName")
+    @Column(name="rolename")
     private String denomination;
 
 

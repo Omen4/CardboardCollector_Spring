@@ -17,17 +17,17 @@ public class Collection {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="collectionId")
-    private Long id;
+    @Column(name="collectionid")
+    private int id;
 
-    @Column(name="ccgName")
+    @Column(name="ccgname")
     private String ccgName;
 
-//    @OneToMany
-//    @JoinTable(
-//            name = "collection_card",
-//            joinColumns = @JoinColumn(name = "collectionId", referencedColumnName = "collectionId"),
-//            inverseJoinColumns = @JoinColumn(name = "card_id", referencedColumnName = "card_id"))
-//    private List<Card> listCard;
+    @OneToMany
+    @JoinTable(
+            name = "collection_ygocards",
+            joinColumns = @JoinColumn(name = "collectionid", referencedColumnName = "collectionid"),
+            inverseJoinColumns = @JoinColumn(name = "cardid", referencedColumnName = "cardid"))
+    private List<Card> listCard;
 
 }
