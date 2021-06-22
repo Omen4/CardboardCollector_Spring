@@ -20,14 +20,14 @@ public class User {
 
     @Id
     @Column(name="userId")
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @Column
     private String pseudo;
 
-    @Column(name="motDePasse")
-    private String motDePasse;
+    @Column(name="password")
+    private String password;
 
 //    @ManyToMany
 //    @JoinTable(
@@ -36,12 +36,12 @@ public class User {
 //            inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
 //    private Set<Role> listeRole = new HashSet<>();
 
-    @OneToMany
-    @JoinTable(
-            name = "user_collection",
-            joinColumns = @JoinColumn(name = "userId", referencedColumnName = "userId"),
-            inverseJoinColumns = @JoinColumn(name = "collectionId", referencedColumnName = "collectionId"))
-    private List<Collection> listCollection;
+//    @OneToMany
+//    @JoinTable(
+//            name = "user_collection",
+//            joinColumns = @JoinColumn(name = "userId", referencedColumnName = "userId"),
+//            inverseJoinColumns = @JoinColumn(name = "collectionId", referencedColumnName = "collectionId"))
+//    private List<Collection> listCollection;
 
     @ManyToMany
     @JoinTable(

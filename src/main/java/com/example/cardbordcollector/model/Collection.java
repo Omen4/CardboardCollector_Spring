@@ -11,24 +11,23 @@ import java.util.List;
 @Entity
 @EntityListeners(AuditingEntityListener.class)
 @Table(name="COLLECTION")
-@Data
 @Getter
 @Setter
 public class Collection {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="collectionId")
     private Long id;
 
     @Column(name="ccgName")
     private String ccgName;
 
-    @OneToMany
-    @JoinTable(
-            name = "collection_card",
-            joinColumns = @JoinColumn(name = "collectionId", referencedColumnName = "collectionId"),
-            inverseJoinColumns = @JoinColumn(name = "cardId", referencedColumnName = "cardId"))
-    private List<Card> listCard;
+//    @OneToMany
+//    @JoinTable(
+//            name = "collection_card",
+//            joinColumns = @JoinColumn(name = "collectionId", referencedColumnName = "collectionId"),
+//            inverseJoinColumns = @JoinColumn(name = "card_id", referencedColumnName = "card_id"))
+//    private List<Card> listCard;
 
 }

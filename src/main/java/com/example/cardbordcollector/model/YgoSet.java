@@ -11,7 +11,6 @@ import javax.persistence.*;
 @Entity
 @EntityListeners(AuditingEntityListener.class)
 @Table(name="SETS")
-@Data
 @Getter
 @Setter
 //@RequestMapping("/myapi/sets")

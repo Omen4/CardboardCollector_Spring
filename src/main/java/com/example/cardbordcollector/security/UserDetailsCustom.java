@@ -21,7 +21,7 @@ public class UserDetailsCustom implements UserDetails {
     public UserDetailsCustom(User user) {
         this.id = user.getId();
         this.username = user.getPseudo();
-        this.password = user.getMotDePasse();
+        this.password = user.getPassword();
         this.active = true;
 
         authorities = new ArrayList<>();

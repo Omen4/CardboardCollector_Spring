@@ -22,9 +22,7 @@ import java.util.List;
 
 @Entity
 @EntityListeners(AuditingEntityListener.class)
-@Table(name="CARDS")
-//@RequestMapping("/myapi/cards")
-@Data
+@Table(name="YGOCARDS")
 @Getter
 @Setter
 public class Card {
@@ -36,7 +34,7 @@ public class Card {
     private Long cardId;
 
     @Column(name="ygoId")
-    private long ygoId;
+    private Long ygoId;
 
     @Column(name="name")
     private String name;
@@ -75,12 +73,12 @@ public class Card {
     @Column(name="linkmarkers")
     private String linkmarkers;
 
-    @OneToMany
-    @JoinTable(
-            name = "card_ygosets",
-            joinColumns = @JoinColumn(name = "cardId", referencedColumnName = "cardId"),
-            inverseJoinColumns = @JoinColumn(name = "setId", referencedColumnName = "setId"))
-    private List<YgoSet> listCardSets;
+//    @OneToMany
+//    @JoinTable(
+//            name = "card_ygosets",
+//            joinColumns = @JoinColumn(name = "card_id", referencedColumnName = "card_id"),
+//            inverseJoinColumns = @JoinColumn(name = "setId", referencedColumnName = "setId"))
+//    private List<YgoSet> listCardSets;
 
     @Column(name="set_name")
     private String set_name;
