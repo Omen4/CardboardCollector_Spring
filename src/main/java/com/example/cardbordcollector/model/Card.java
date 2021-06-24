@@ -42,34 +42,42 @@ public class Card {
     @Column(name="cardtype")
     private String type;
 
-    @Column(name="carddesc")
+    @Column(name="carddesc", length = 500)
     private String desc;
 
+    @Nullable
     @Column(name="cardatk")
     private int atk;
 
+    @Nullable
     @Column(name="carddef")
     private int def;
 
+    @Nullable
     @Column(name="cardlevel")
     private int level;
 
     @Column(name="cardrace")
     private String race;
 
+    @Nullable
     @Column(name="cardattribute")
     private String attribute;
     //toUpperCase
 
+    @Nullable
     @Column(name="cardarchetype")
     private String archetype;
 
+    @Nullable
     @Column(name="cardscale")
     private int scale;
 
+    @Nullable
     @Column(name="cardlinkval")
     private int linkval;
 
+    @Nullable
     @Column(name="cardlinkmarkers")
     private String linkmarkers;
 
@@ -89,15 +97,18 @@ public class Card {
     @Column(name="setrarity")
     private String set_rarity;
 
+    @Nullable
     @Column(name="setprice")
     private float set_price;
 
     @Column(name="imageurl")
     private String image_url;
 
+    @Nullable
     @Column(name="tcgdate")
     private String tcg_date;
 
+    @Nullable
     @Column(name="ocgdate")
     private String ocg_date;
 }
