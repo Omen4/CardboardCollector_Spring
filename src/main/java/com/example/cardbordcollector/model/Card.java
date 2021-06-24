@@ -42,7 +42,8 @@ public class Card {
     @Column(name="cardtype")
     private String type;
 
-    @Column(name="carddesc", length = 500)
+    @Lob
+    @Column(name="carddesc", length=512)
     private String desc;
 
     @Nullable
