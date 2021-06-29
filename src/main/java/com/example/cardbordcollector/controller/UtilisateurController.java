@@ -1,12 +1,11 @@
 package com.example.cardbordcollector.controller;
 
-import com.example.cardbordcollector.dao.UserDao;
+import com.example.cardbordcollector.dao.UtilisateurDao;
 import com.example.cardbordcollector.model.Role;
-import com.example.cardbordcollector.model.User;
+import com.example.cardbordcollector.model.Utilisateur;
 import com.example.cardbordcollector.security.JwtUtil;
 import com.example.cardbordcollector.security.UserDetailsCustom;
 import com.example.cardbordcollector.security.UserDetailsServiceCustom;
-import com.fasterxml.jackson.annotation.JsonView;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -22,9 +21,9 @@ import java.util.Optional;
 @RestController
 @CrossOrigin
 @Data
-public class UserController {
+public class UtilisateurController {
 
-    private UserDao utilisateurDao;
+    private UtilisateurDao utilisateurDao;
     private JwtUtil jwtUtil;
     private AuthenticationManager authenticationManager;
     private UserDetailsServiceCustom userDetailsServiceCustom;
@@ -32,8 +31,8 @@ public class UserController {
 
 
     @Autowired
-    UserController(
-            UserDao utilisateurDao,
+    UtilisateurController(
+            UtilisateurDao utilisateurDao,
             JwtUtil jwtUtil,
             AuthenticationManager authenticationManager,
             UserDetailsServiceCustom userDetailsServiceCustom,
@@ -47,7 +46,7 @@ public class UserController {
     }
 
     @PostMapping("/authentification")
-    public ResponseEntity<String> authentification(@RequestBody User utilisateur) throws Exception {
+    public ResponseEntity<String> authentification(@RequestBody Utilisateur utilisateur) throws Exception {
 
         try {
             authenticationManager.authenticate(
@@ -59,15 +58,15 @@ public class UserController {
             return ResponseEntity.badRequest().body("Mauvais pseudo / mot de passe");
         }
 
-        UserDetailsCustom userDetails = this.userDetailsServiceCustom.loadUserByUsername(utilisateur.getPseudo());
+        UserDetailsCustom userDetails = (UserDetailsCustom) this.userDetailsServiceCustom.loadUserByUsername(utilisateur.getPseudo());
 
         return ResponseEntity.ok(jwtUtil.generateToken(userDetails));
     }
 
     @PostMapping("/inscription")
-    public ResponseEntity<String> inscription(@RequestBody User utilisateur) {
+    public ResponseEntity<String> inscription(@RequestBody Utilisateur utilisateur) {
 
-        Optional<User> utilisateurDoublon = utilisateurDao.trouverParPseudo(utilisateur.getPseudo());
+        Optional<Utilisateur> utilisateurDoublon = utilisateurDao.trouverParPseudo(utilisateur.getPseudo());
 
         if (utilisateurDoublon.isPresent()) {
             return ResponseEntity.badRequest().body("Ce pseudo est déja utilisé");
@@ -87,12 +86,12 @@ public class UserController {
     }
 
     @PostMapping("/admin/utilisateur")
-    public ResponseEntity<String> updateUser(@RequestBody User utilisateur) {
+    public ResponseEntity<String> updateUser(@RequestBody Utilisateur utilisateur) {
 
-        Optional<User> utilisateurBddOptional = utilisateurDao.trouverParPseudo(utilisateur.getPseudo());
+        Optional<Utilisateur> utilisateurBddOptional = utilisateurDao.trouverParPseudo(utilisateur.getPseudo());
 
         if (utilisateurBddOptional.isPresent()) {
-            User utilisateurBdd = utilisateurBddOptional.get();
+            Utilisateur utilisateurBdd = utilisateurBddOptional.get();
             utilisateur.setPassword(utilisateurBdd.getPassword());
             utilisateurDao.save(utilisateur);
             return ResponseEntity.ok().body("Utilisateur mis à jour");
@@ -103,7 +102,7 @@ public class UserController {
 
 
     @GetMapping("/user/utilisateur-connecte")
-    public ResponseEntity<User> getInformationUtilisateurConnecte(
+    public ResponseEntity<Utilisateur> getInformationUtilisateurConnecte(
             @RequestHeader(value = "Authorization") String authorization) {
         //la valeur du champs authorization est extrait de l'entête de la requête
 
@@ -113,7 +112,7 @@ public class UserController {
         //on extrait l'information souhaitée du token
         String username = jwtUtil.getTokenBody(token).getSubject();
 
-        Optional<User> utilisateur = utilisateurDao.trouverParPseudo(username);
+        Optional<Utilisateur> utilisateur = utilisateurDao.trouverParPseudo(username);
 
         if (utilisateur.isPresent()) {
             return ResponseEntity.ok().body(utilisateur.get());
@@ -124,9 +123,9 @@ public class UserController {
 
 
     @GetMapping("/admin/utilisateur/{id}")
-    public ResponseEntity<User> getUtilisateur(@PathVariable int id) {
+    public ResponseEntity<Utilisateur> getUtilisateur(@PathVariable int id) {
 
-        Optional<User> utilisateur = utilisateurDao.findById(id);
+        Optional<Utilisateur> utilisateur = utilisateurDao.findById(id);
 
         if (utilisateur.isPresent()) {
             return ResponseEntity.ok(utilisateur.get());
@@ -137,7 +136,7 @@ public class UserController {
 
 
     @GetMapping("/admin/utilisateurs")
-    public ResponseEntity<List<User>> getUtilisateurs() {
+    public ResponseEntity<List<Utilisateur>> getUtilisateurs() {
 
         return ResponseEntity.ok(utilisateurDao.findAll());
     }

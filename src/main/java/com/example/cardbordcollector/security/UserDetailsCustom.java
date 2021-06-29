@@ -1,7 +1,7 @@
 package com.example.cardbordcollector.security;
 
 import com.example.cardbordcollector.model.Role;
-import com.example.cardbordcollector.model.User;
+import com.example.cardbordcollector.model.Utilisateur;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -18,15 +18,15 @@ public class UserDetailsCustom implements UserDetails {
     private boolean active;
     private List<GrantedAuthority> authorities;
 
-    public UserDetailsCustom(User user) {
-        this.id = user.getId();
-        this.username = user.getPseudo();
-        this.password = user.getPassword();
+    public UserDetailsCustom(Utilisateur utilisateur) {
+        this.id = utilisateur.getId();
+        this.username = utilisateur.getPseudo();
+        this.password = utilisateur.getPassword();
         this.active = true;
 
         authorities = new ArrayList<>();
 
-        for(Role role : user.getListeRole()){
+        for(Role role : utilisateur.getListeRole()){
             authorities.add(new SimpleGrantedAuthority(role.getDenomination()));
         }
 

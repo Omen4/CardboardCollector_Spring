@@ -1,5 +1,6 @@
 package com.example.cardbordcollector.model;
 
+import com.example.cardbordcollector.view.VueUtilisateur;
 import com.fasterxml.jackson.annotation.JsonView;
 import lombok.Data;
 import lombok.Getter;
@@ -16,17 +17,26 @@ import java.util.Set;
 @Table(name="USERS")
 @Getter
 @Setter
-public class User {
+public class Utilisateur {
+
+    public Utilisateur() {
+    }
+
+    public Utilisateur(Integer id) {
+        this.id = id;
+
+    }
 
     @Id
     @Column(name="userid")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonView(VueUtilisateur.Standard.class)
     private int id;
 
-    @Column(name="userpseudo")
+    @Column(name="userpseudo", nullable = false)
+    @JsonView(VueUtilisateur.Standard.class)
     private String pseudo;
 
-    @Column(name="userpassword")
     private String password;
 
 //    @ManyToMany
@@ -37,6 +47,7 @@ public class User {
 //    private Set<Role> listeRole = new HashSet<>();
 
     @OneToMany
+    @JsonView(VueUtilisateur.Standard.class)
     @JoinTable(
             name = "user_collection",
             joinColumns = @JoinColumn(name = "userid", referencedColumnName = "userid"),
@@ -44,9 +55,14 @@ public class User {
     private List<Collection> listCollection;
 
     @ManyToMany
+    @JsonView(VueUtilisateur.Standard.class)
     @JoinTable(
             name = "user_role",
             joinColumns = @JoinColumn(name = "userid", referencedColumnName = "userid"),
             inverseJoinColumns = @JoinColumn(name = "roleid", referencedColumnName = "roleid"))
     private Set<Role> listeRole = new HashSet<>();
+    
+    
+//    public String getPassword() {return password;}
+//    public void setPassword(String password)   {this.password=password;}
 }

@@ -17,11 +17,11 @@ import java.util.Arrays;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    final UserDetailsServiceCustom userDetailsService;
+    final com.example.cardbordcollector.security.UserDetailsServiceCustom userDetailsService;
 
-    final JwtRequestFilter jwtRequestFilter;
+    final com.example.cardbordcollector.security.JwtRequestFilter jwtRequestFilter;
 
-    public SecurityConfig(UserDetailsServiceCustom userDetailsService, JwtRequestFilter jwtRequestFilter) {
+    public SecurityConfig(com.example.cardbordcollector.security.UserDetailsServiceCustom userDetailsService, com.example.cardbordcollector.security.JwtRequestFilter jwtRequestFilter) {
         this.userDetailsService = userDetailsService;
         this.jwtRequestFilter = jwtRequestFilter;
     }
@@ -40,7 +40,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     corsConfiguration.applyPermitDefaultValues();
                     corsConfiguration.setAllowedMethods(Arrays.asList("GET", "POST", "DELETE", "PUT"));
                     corsConfiguration.setAllowedHeaders(
-                            Arrays.asList("X-Requested-With", "Origin", "Content-Type", "Accept", "Authorization","Access-Control-Allow-Origin"));
+                            Arrays.asList("X-Requested-With", "Origin", "Content-Type",
+                                    "Accept", "Authorization","Access-Control-Allow-Origin"));
                     return corsConfiguration;
                 })
 

@@ -1,7 +1,7 @@
 package com.example.cardbordcollector.security;
 
-import com.example.cardbordcollector.dao.UserDao;
-import com.example.cardbordcollector.model.User;
+import com.example.cardbordcollector.dao.UtilisateurDao;
+import com.example.cardbordcollector.model.Utilisateur;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
@@ -10,20 +10,19 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserDetailsServiceCustom implements UserDetailsService {
 
-    private final UserDao utilisateurDao;
-    private Object User;
+    private final UtilisateurDao utilisateurDao;
 
-    public UserDetailsServiceCustom(UserDao utilisateurDao) {
+    public UserDetailsServiceCustom(UtilisateurDao utilisateurDao) {
         this.utilisateurDao = utilisateurDao;
     }
 
     @Override
     public UserDetailsCustom loadUserByUsername(String pseudoSaisi) throws UsernameNotFoundException {
 
-        User utilisateur = utilisateurDao
-                .trouverParPseusoAvecRoles(pseudoSaisi)
+        Utilisateur utilisateur = utilisateurDao
+                .trouverParPseudoAvecRoles(pseudoSaisi)
                 .orElseThrow(() -> new UsernameNotFoundException(pseudoSaisi + " inconnu"));
 
-        return new UserDetailsCustom((com.example.cardbordcollector.model.User) User);
+        return new UserDetailsCustom(utilisateur);
     }
 }
