@@ -27,7 +27,7 @@ public class Collection {
     @JsonView(VueUtilisateur.Standard.class)
     private String ccgName;
 
-    @OneToMany
+    @ManyToMany
     @JsonView(VueUtilisateur.Standard.class)
     @JoinTable(
             name = "collection_ygocards",

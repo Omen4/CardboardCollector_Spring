@@ -22,12 +22,11 @@ import java.util.Optional;
 
 @Repository
 public interface UtilisateurDao extends JpaRepository<Utilisateur, Integer> {
-    @Query("FROM Utilisateur users JOIN FETCH users.listeRole WHERE users.pseudo = :pseudo")
+    @Query("FROM Utilisateur u JOIN FETCH u.listeRole WHERE u.pseudo = :pseudo")
     Optional<Utilisateur> trouverParPseudoAvecRoles(@Param("pseudo") String pseudo);
 
-    @Query( "FROM Utilisateur users " +
-            "JOIN FETCH users.listCollection c " +
-            "WHERE users.pseudo = :pseudo " +
-            "ORDER BY c.id DESC")
+    @Query( "FROM Utilisateur u " +
+            "WHERE u.pseudo = :pseudo " +
+            "ORDER BY u.id DESC")
     Optional<Utilisateur> trouverParPseudo(@Param("pseudo") String pseudo);
 }
