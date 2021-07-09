@@ -197,7 +197,7 @@
                 <database_port>3306</database_port>
                 <database_name>spring_cardboardCollector</database_name>
                 <database_username>root</database_username>
-                <database_password></database_password>
+                <database_password/>
                 <jwt_secret>azerty123</jwt_secret>
                 <database_initialization_mode>ALWAYS</database_initialization_mode>
                 <database_ddl_initialization>true</database_ddl_initialization>

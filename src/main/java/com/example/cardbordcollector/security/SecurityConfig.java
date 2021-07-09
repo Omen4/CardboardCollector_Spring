@@ -51,14 +51,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .antMatchers("/test/**").permitAll()
                     .antMatchers("/authentification").permitAll()
                     .antMatchers("/inscription").permitAll()
-                    .antMatchers("/admin/**").hasRole("ADMINISTRATEUR")
-                    .antMatchers("/user/**").hasAnyRole("ADMINISTRATEUR","UTILISATEUR")
-
-                    /*.antMatchers("/demo/test/**").permitAll()
-                    .antMatchers("/demo/authentification").permitAll()
-                    .antMatchers("/demo/inscription").permitAll()
-                    .antMatchers("/demo/admin/**").hasRole("ADMINISTRATEUR")
-                    .antMatchers("/demo/user/**").hasAnyRole("ADMINISTRATEUR","UTILISATEUR")*/
+                    .antMatchers("/admin/**").hasRole("ADMIN")
+                    .antMatchers("/user/**").hasAnyRole("ADMIN","NOTADMIN")
                     .anyRequest().authenticated()
                 .and().exceptionHandling()
                 .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)

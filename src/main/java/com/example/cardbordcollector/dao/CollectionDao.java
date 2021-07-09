@@ -11,4 +11,7 @@ import java.util.Optional;
 
 @Repository
 public interface CollectionDao extends JpaRepository<Collection, Integer> {
+
+
+
 }

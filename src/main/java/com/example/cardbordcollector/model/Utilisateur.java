@@ -33,10 +33,11 @@ public class Utilisateur {
     @JsonView(VueUtilisateur.Standard.class)
     private int id;
 
-    @Column(name="userpseudo", nullable = false)
+    @Column(name="userpseudo", nullable = false, length = 50)
     @JsonView(VueUtilisateur.Standard.class)
     private String pseudo;
 
+    @Column(name="userpassword", nullable = false)
     private String password;
 
 //    @ManyToMany
@@ -61,8 +62,4 @@ public class Utilisateur {
             joinColumns = @JoinColumn(name = "userid", referencedColumnName = "userid"),
             inverseJoinColumns = @JoinColumn(name = "roleid", referencedColumnName = "roleid"))
     private Set<Role> listeRole = new HashSet<>();
-    
-    
-//    public String getPassword() {return password;}
-//    public void setPassword(String password)   {this.password=password;}
 }

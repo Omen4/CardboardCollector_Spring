@@ -22,6 +22,7 @@ import java.util.Optional;
 
 @Repository
 public interface UtilisateurDao extends JpaRepository<Utilisateur, Integer> {
+
     @Query("FROM Utilisateur u JOIN FETCH u.listeRole WHERE u.pseudo = :pseudo")
     Optional<Utilisateur> trouverParPseudoAvecRoles(@Param("pseudo") String pseudo);
 

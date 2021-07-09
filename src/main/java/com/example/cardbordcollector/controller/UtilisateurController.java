@@ -135,9 +135,8 @@ public class UtilisateurController {
     }
 
 
-    @GetMapping("/admin/utilisateurs")
+    @GetMapping("/admin/ utilisateurs")
     public ResponseEntity<List<Utilisateur>> getUtilisateurs() {
-
         return ResponseEntity.ok(utilisateurDao.findAll());
     }
 

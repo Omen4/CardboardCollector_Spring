@@ -48,15 +48,15 @@ public class Card {
 
     @Nullable
     @Column(name="cardatk")
-    private int atk;
+    private Integer atk;
 
     @Nullable
     @Column(name="carddef")
-    private int def;
+    private Integer def;
 
     @Nullable
     @Column(name="cardlevel")
-    private int level;
+    private Integer level;
 
     @Column(name="cardrace")
     private String race;
@@ -72,11 +72,11 @@ public class Card {
 
     @Nullable
     @Column(name="cardscale")
-    private int scale;
+    private Integer scale;
 
     @Nullable
     @Column(name="cardlinkval")
-    private int linkval;
+    private Integer linkval;
 
     @Nullable
     @Column(name="cardlinkmarkers")
@@ -100,7 +100,7 @@ public class Card {
 
     @Nullable
     @Column(name="setprice")
-    private float set_price;
+    private Float set_price;
 
     @Column(name="imageurl")
     private String image_url;
