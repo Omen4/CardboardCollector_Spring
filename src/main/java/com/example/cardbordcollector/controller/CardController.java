@@ -63,14 +63,25 @@ public class CardController {
     }
 
     @DeleteMapping("/card/{id}")
-    public ResponseEntity<Integer> deleteCard (@PathVariable int id){
-        if(cardDao.existsById(id)){
-            cardDao.deleteById(id);
-            return ResponseEntity.ok(id);
-        }else{
-            return ResponseEntity.noContent().build();
-        }
+    public ResponseEntity<Integer> deleteCard (@PathVariable int id,
+                                               @RequestHeader(value = "Authorization") String authorization) {
 
+        String token = authorization.substring(7);
+        String username = jwtUtil.getTokenBody(token).getSubject();
+        Optional<Utilisateur> utilisateur = userDao.trouverParPseudo(username);
+        if (utilisateur.isPresent()) {
+            Optional<Card> card = cardDao.findById(id);
+            if (card.isPresent()) {
+                List<Card> listCard = utilisateur.get().getListCollection().get(0).getListCard();
+                if (listCard.contains(card.get())) {
+                    listCard.remove(card.get());
+                    collectionDao.saveAndFlush(utilisateur.get().getListCollection().get(0));
+                    userDao.saveAndFlush(utilisateur.get());
+                    return ResponseEntity.ok().build();
+                }
+            }
+        }
+        return ResponseEntity.notFound().build();
     }
 
     @GetMapping("/cards")
