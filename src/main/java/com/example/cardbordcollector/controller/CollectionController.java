@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @CrossOrigin
@@ -24,10 +25,18 @@ public class CollectionController {
     private CollectionDao collectionDao;
     private UtilisateurDao userDao;
     private CardDao cardDao;
-    JwtUtil jwtUtil;
+    private JwtUtil jwtUtil;
 
     @Autowired
-    CollectionController(CollectionDao collectionDao){this.collectionDao = collectionDao; }
+    CollectionController(CollectionDao collectionDao,
+                         UtilisateurDao userDao,
+                         CardDao cardDao,
+                         JwtUtil jwtUtil){
+        this.collectionDao = collectionDao;
+        this.userDao = userDao;
+        this.cardDao = cardDao;
+        this.jwtUtil = jwtUtil;
+    }
 
     //Ajouter une collection à un utilisateur
     @PostMapping("/user/collection")
@@ -49,15 +58,15 @@ public class CollectionController {
         }
     }
 
-    //Récupérer les cartes d'une collection d'un utilisateur selon le CCG
-    @GetMapping("/user/collection/{id}")
-    public ResponseEntity<List<Card>> getUserCardsInCollection (@PathVariable int id){
-        if (collectionDao.existsById(id)){
-            return ResponseEntity.ok(collectionDao.getById(id).getListCard());
-        }else{
-            return ResponseEntity.noContent().header("NO_CONTENT", "0").build();
-        }
-    }
+//    //Récupérer les cartes d'une collection d'un utilisateur selon le CCG
+//    @GetMapping("/user/collection/{id}")
+//    public ResponseEntity<List<Card>> getUserCardsInCollection (@PathVariable int id){
+//        if (collectionDao.existsById(id)){
+//            return ResponseEntity.ok(collectionDao.getById(id).getListCard());
+//        }else{
+//            return ResponseEntity.noContent().header("NO_CONTENT", "0").build();
+//        }
+//    }
 
     //Check les collections d'un utilisateur
     @GetMapping("/collections")
@@ -75,6 +84,22 @@ public class CollectionController {
         }
     }
 
+    @GetMapping("/user/mycollection/mycards")
+    public ResponseEntity<List<Card>> getMyCollection(
+            @RequestHeader(value = "Authorization") String authorization) {
+
+        String token = authorization.substring(7);
+        String username = jwtUtil.getTokenBody(token).getSubject();
+        Optional<Utilisateur> utilisateur = userDao.trouverParPseudo(username);
+
+        if (utilisateur.isPresent()) {
+            int userId = utilisateur.get().getId();
+            //Passer l'idée de la collection dans le futur (plusieurs CCG)
+            return ResponseEntity.ok().body( utilisateur.get().getListCollection().get(0).getListCard());
+        }
+
+        return ResponseEntity.notFound().build();
+    }
 
 
 }
